@@ -12,3 +12,6 @@ evidence/
 .DS_Store
 *.tar.gz
 __pycache__/
+.agents/
+.claude
+golem-parcel-lab/AGENTS.md
