@@ -43,5 +43,3 @@ Paths below are inside `golem-parcel-lab/`:
 - `scripts/verify.mjs` — crash and recovery harness.
 
 Recovery replays local filesystem state. This verifies one logical tool call and its final files; external side effects still need receiver-side idempotency or reconciliation.
-
-Artwork is based on Golem’s mascot; the Halloween variant was generated from supplied references.
