@@ -1,0 +1,7 @@
+/golem-temp
+/node_modules
+/.data/
+/.tools/
+/evidence/*/*.log
+/evidence/*/*.ports.json
+/build.log

@@ -1,0 +1,115 @@
+/* These finite stages are queued only after a real cable-target denial.
+   Keep the cable and house lights unchanged: the request never reaches the effect. */
+.mission-scene[data-motion] {
+  --courier-cable-step: min(36vw, 420px);
+  --policy-block-duration: 2100ms;
+}
+
+/* Share the SVG's grid cell so the ward follows the cable at every scene width. */
+.house-prop { position: relative; display: grid; justify-items: center; }
+.house-prop > .house-illustration { grid-area: 1 / 1; }
+.house-prop > .scene-cable-name { grid-area: 2 / 1; }
+.cable-ward {
+  grid-area: 1 / 1;
+  justify-self: end;
+  align-self: end;
+  position: relative;
+  z-index: 6;
+  width: 52%;
+  aspect-ratio: 1;
+  margin-right: -3%;
+  margin-bottom: -5%;
+  border: 2px solid #ffb0b8;
+  border-radius: 43% 43% 50% 50%;
+  background: radial-gradient(ellipse at 45% 40%, #3d2339ef, #2c182ab8 70%);
+  box-shadow: 0 0 0 5px #ff989f13, inset 0 0 14px #ff989f33, 0 0 25px #ff989f55;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(.7);
+  transform-origin: 45% 50%;
+}
+.cable-ward::before {
+  content: "⊘";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #ffd8dc;
+  font: 600 clamp(26px, 4.3vw, 52px)/1 var(--sans, sans-serif);
+  text-shadow: 0 0 12px #ff989fcc;
+}
+.cable-ward::after {
+  content: "";
+  position: absolute;
+  inset: -11%;
+  border: 2px solid #ffb8c2;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #ff989f66, -7px -4px 0 -5px #fff0db, 8px 4px 0 -5px #fff0db;
+  opacity: 0;
+}
+
+.mission-scene:is([data-motion="blocking-before"], [data-motion="blocking-after"]) .courier-rig {
+  z-index: 4;
+  transform: none;
+  opacity: 1;
+  filter: none;
+  animation: courier-policy-recoil var(--policy-block-duration) ease-in-out both;
+}
+.mission-scene:is([data-motion="blocking-before"], [data-motion="blocking-after"]) .courier-knife {
+  opacity: 1;
+  transform: rotate(-28deg);
+  animation: knife-policy-recoil var(--policy-block-duration) ease-in-out both;
+}
+.mission-scene:is([data-motion="blocking-before"], [data-motion="blocking-after"]) .cable-ward {
+  opacity: 1;
+  animation: cable-ward-block var(--policy-block-duration) linear both;
+}
+.mission-scene:is([data-motion="blocking-before"], [data-motion="blocking-after"]) .cable-ward::after {
+  animation: cable-ward-ripple var(--policy-block-duration) ease-out both;
+}
+
+@keyframes courier-policy-recoil {
+  0%, 10% { transform: translateX(0) rotate(0); }
+  37% { transform: translateX(var(--courier-cable-step)) rotate(5deg); }
+  46% { transform: translateX(var(--courier-cable-step)) rotate(-7deg); }
+  53% { transform: translateX(var(--courier-cable-step)) rotate(12deg); }
+  61% { transform: translateX(calc(var(--courier-cable-step) - 24px)) rotate(-13deg); }
+  72% { transform: translateX(calc(var(--courier-cable-step) - 24px)) rotate(-4deg); }
+  100% { transform: translateX(0) rotate(0); }
+}
+@keyframes knife-policy-recoil {
+  0%, 37% { transform: rotate(-28deg); }
+  46% { transform: rotate(-67deg) translateY(-5px); }
+  53% { transform: rotate(36deg) translate(4px, 6px); }
+  59% { transform: rotate(-85deg) translate(-8px, -10px); }
+  74% { transform: rotate(-45deg); }
+  100% { transform: rotate(-28deg); }
+}
+@keyframes cable-ward-block {
+  0%, 29% { opacity: 0; transform: scale(.7); }
+  38%, 48% { opacity: .85; transform: scale(1); }
+  54% { opacity: 1; transform: scale(1.13); box-shadow: 0 0 0 7px #ff989f33, inset 0 0 24px #ffccd566, 0 0 38px #ff989faa; }
+  64%, 77% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(.9); }
+}
+@keyframes cable-ward-ripple {
+  0%, 49% { opacity: 0; transform: scale(.8); }
+  54% { opacity: 1; transform: scale(1); }
+  74%, 100% { opacity: 0; transform: scale(1.5); }
+}
+
+@media (max-width: 800px) {
+  .mission-scene[data-motion] { --courier-cable-step: min(35vw, 250px); }
+  .cable-ward::before { font-size: 32px; }
+}
+@media (max-width: 440px) {
+  .mission-scene[data-motion] { --courier-cable-step: min(31vw, 130px); }
+  .cable-ward { border-width: 1px; }
+  .cable-ward::before { font-size: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mission-scene:is([data-motion="blocking-before"], [data-motion="blocking-after"]) .courier-rig { transform: none; }
+  .mission-scene:is([data-motion="blocking-before"], [data-motion="blocking-after"]) .courier-knife { transform: rotate(-28deg); }
+  .mission-scene:is([data-motion="blocking-before"], [data-motion="blocking-after"]) .cable-ward { opacity: 1; transform: none; }
+  .cable-ward::after { display: none; }
+}

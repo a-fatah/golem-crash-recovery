@@ -1,0 +1,13 @@
+{
+  "tag": "v1.6.1",
+  "releaseUrl": "https://github.com/golemcloud/golem/releases/tag/v1.6.1",
+  "publishedAt": "2026-10-24T06:20:37Z",
+  "assetName": "golem-aarch64-apple-darwin",
+  "downloadUrl": "https://github.com/golemcloud/golem/releases/download/v1.6.1/golem-aarch64-apple-darwin",
+  "sizeBytes": 373021792,
+  "expectedDigest": "sha256:ec0e2ae93ae88e0599fa7f70a79ccd46457a35f745d81b225ff3132d2c8a4734",
+  "verifiedDigest": "sha256:ec0e2ae93ae88e0599fa7f70a79ccd46457a35f745d81b225ff3132d2c8a4734",
+  "digestVerified": true,
+  "version": "golem 1.6.1",
+  "verifiedAt": "2026-10-27T16:59:44.031778+00:00"
+}

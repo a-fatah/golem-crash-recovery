@@ -1,0 +1,82 @@
+/* Background work is separate from the finite, evidence-driven scene cues. */
+.mission-activity {
+  position: relative;
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 10px 2px 7px;
+  border-top: 1px solid #9d78472e;
+  color: #f4bf88;
+  overflow: hidden;
+}
+.mission-activity[hidden] { display: none; }
+.mission-activity::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 22%;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, currentColor, transparent);
+  opacity: .45;
+}
+.mission-activity-indicator {
+  width: 13px;
+  height: 13px;
+  flex: 0 0 13px;
+  border: 2px solid #f4bf8840;
+  border-top-color: currentColor;
+  border-radius: 50%;
+}
+.mission-activity-copy { display: grid; gap: 1px; min-width: 0; }
+.mission-activity-copy strong { color: inherit; font: 600 12px/1.45 var(--sans, sans-serif); }
+.mission-activity-copy > span { color: var(--muted, #afa3bd); font: 11px/1.5 var(--sans, sans-serif); }
+.mission-activity-copy > span:empty { display: none; }
+.mission-activity-elapsed { flex: 0 0 auto; margin-left: auto; color: var(--muted, #afa3bd); font: 11px/1.5 var(--mono, monospace); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.mission-activity-elapsed[hidden] { display: none; }
+.mission-scene[data-activity="unavailable"] .mission-activity { color: #ffb1b7; }
+.mission-scene[data-activity="unavailable"] .mission-activity-indicator {
+  border-color: currentColor;
+  border-radius: 3px;
+}
+.mission-scene[data-activity-motion="true"] .mission-activity::after {
+  animation: mission-activity-travel 2.4s ease-in-out infinite;
+}
+.mission-scene[data-activity-motion="true"] .mission-activity-indicator {
+  animation: mission-activity-turn 1.1s linear infinite;
+}
+.mission-scene:is([data-activity="preparing"], [data-activity="connecting"])[data-activity-motion="true"]:is([data-motion="ready"], [data-motion="preparing"]) .hero-art {
+  animation: mission-activity-breathe 2.8s ease-in-out infinite;
+}
+.mission-scene:is([data-activity="restarting"], [data-activity="recovering"])[data-activity-motion="true"]:is([data-motion="down"], [data-motion="finishing"]) .resurrection-glow {
+  animation: mission-activity-aura 2.4s ease-in-out infinite;
+}
+@keyframes mission-activity-travel {
+  0% { transform: translateX(-100%); opacity: .15; }
+  45%, 60% { opacity: .65; }
+  100% { transform: translateX(455%); opacity: .15; }
+}
+@keyframes mission-activity-turn { to { transform: rotate(1turn); } }
+@keyframes mission-activity-breathe {
+  0%, 100% { transform: translateY(0); filter: brightness(1); }
+  50% { transform: translateY(-3px); filter: brightness(1.08); }
+}
+@keyframes mission-activity-aura {
+  0%, 100% { opacity: .2; transform: scale(.9); }
+  50% { opacity: .65; transform: scale(1.04); }
+}
+@media (max-width: 440px) {
+  .mission-activity { display: grid; grid-template-columns: 13px minmax(0, 1fr) auto; gap: 8px; padding-top: 8px; }
+  .mission-activity-elapsed { margin-left: 0; color: #ffd1a0; font-size: 13px; font-weight: 600; letter-spacing: -.02em; }
+  .mission-activity-copy strong { font-size: 11px; }
+  .mission-activity-copy > span { font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mission-scene[data-activity-motion] .mission-activity::after,
+  .mission-scene[data-activity-motion] .mission-activity-indicator,
+  .mission-scene[data-activity-motion] .hero-art,
+  .mission-scene[data-activity-motion] .resurrection-glow { animation: none !important; }
+}

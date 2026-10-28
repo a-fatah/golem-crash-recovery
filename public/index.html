@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0c0a11" />
+    <meta name="description" content="A hands-on local experiment in durable execution and host-enforced tool permissions." />
+    <title>Golem’s Candy Mission — Survive the crash</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/mission-motion.css" />
+    <link rel="stylesheet" href="/mission-policy-motion.css" />
+    <link rel="stylesheet" href="/mission-activity.css" />
+    <link rel="stylesheet" href="/mission-code.css" />
+    <link rel="stylesheet" href="/mission-code-tokens.css" />
+    <link rel="stylesheet" href="/mission-playback.css" />
+    <script type="module" src="/app.js"></script>
+    <script type="module" src="/mission-embed.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#experiment">Skip to the experiment</a>
+    <div class="page-shell">
+      <header class="masthead">
+        <a class="brand" href="/" aria-label="Golem Afterlife Lab home">
+          <img class="brand-mark brand-logo" src="/assets/golem-logo.png" alt="" width="40" height="40" aria-hidden="true" />
+          <span>Golem Afterlife Lab</span>
+        </a>
+        <span class="masthead-note"><span class="signal-dot"></span>Halloween edition <span class="edition-mark" aria-hidden="true">✦</span></span>
+      </header>
+
+      <main>
+        <section class="hero" aria-labelledby="page-title">
+          <div>
+            <p class="eyebrow"><span class="tiny-rule"></span> A tiny Halloween mission. A real server crash.</p>
+            <h1 id="page-title">Save the candy. <span>Keep the lights on.</span></h1>
+            <p id="hero-description" class="hero-description">Give an agent a tool. Kill its process mid-task. Watch it recover its progress—and still obey the rules.</p>
+            <p id="runtime-disclaimer" class="disclaimer">Connecting to the experiment runtime…</p>
+          </div>
+
+        </section>
+
+        <section id="experiment" class="experiment-section" aria-labelledby="experiment-title">
+          <div class="section-heading visually-hidden">
+            <div><p class="eyebrow">The mission</p><h2 id="experiment-title">Get the candy ready. Leave the cable alone.</h2></div>
+            <span class="experiment-id">CASE 031 <span aria-hidden="true">/</span> RECOVERY &amp; POLICY</span>
+          </div>
+
+
+          <article class="mission-panel" id="mission-panel" aria-labelledby="mission-title">
+            <div class="mission-header"><div><p class="eyebrow">Candy dispatch · October 31</p><h3 id="mission-title">Connecting to the mission…</h3></div><span id="status-badge" class="status-badge" data-status="loading"><span></span>Connecting</span></div>
+            <details class="mission-help"><summary>About this run</summary><p class="mission-narrative" id="mission-narrative">Reading the actual Golem experiment state.</p><p class="action-note mission-action-note" id="action-note">The first run injects a real process crash automatically.</p></details>
+            <div id="mission-stage" class="mission-stage">
+            <div class="mission-run-controls" role="group" aria-label="Run the mission">
+              <div class="action-bar mission-controls">
+                <button id="primary-action" class="button primary-button" type="button" aria-describedby="action-note" disabled><span id="primary-label">Connecting</span><span class="button-arrow" aria-hidden="true">↗</span></button>
+                <button id="crash-action" class="button secondary-button" type="button" hidden>Kill worker</button>
+                <button id="reset-action" class="text-button" type="button" disabled>Reset lab <span aria-hidden="true">↻</span></button>
+              </div>
+              <div class="error-box" id="action-error" role="alert" hidden></div>
+            </div>
+            <div class="mission-rule" id="mission-rule" role="group" aria-label="Mission boundaries">
+              <div class="mission-rule-allow"><span class="rule-symbol" aria-hidden="true">✓</span><span><b>Ribbon allowed</b><small>Cut and seal</small></span></div>
+              <div class="mission-rule-deny"><span class="rule-symbol" aria-hidden="true">⊘</span><span><b>Cable off limits</b><small>Do not cut or write</small></span></div>
+            </div>
+            <div class="mission-workspace">
+            <div class="mission-scene" id="mission-scene" data-scene="ready" data-cut="false" data-sealed="false" data-cable-intact="true">
+              <div class="scene-station courier-station"><div class="courier-rig"><div class="resurrection-glow" aria-hidden="true"></div><div class="hero-art"><img class="golem-illustration official-golem-portrait" src="/assets/golem-halloween.png" alt="Golem mascot wearing a witch hat and an orange-lined plum cape" width="1254" height="1254" /></div><svg class="courier-knife" viewBox="0 0 120 50" aria-hidden="true"><path class="blade" d="m30 28 78-19c-3 18-19 28-41 30H31V28Z"/><path class="knifehandle" d="M4 27h29v14H4c-4-3-4-11 0-14Z"/><circle cx="12" cy="34" r="2" fill="#e5b781"/><circle cx="24" cy="34" r="2" fill="#e5b781"/></svg><div class="stone-dust" aria-hidden="true"><span></span><span></span><span></span></div></div><strong>Golem the courier</strong><span class="scene-caption" id="courier-caption">Waiting for runtime state</span></div>
+              <div class="scene-station parcel-station"><div class="parcel-prop" aria-hidden="true"><div class="parcel-candy"><span>✦</span><span>◆</span><span>✦</span></div><div class="parcel-lid"></div><div class="parcel-box"><span>HALLOWEEN<br>CANDY</span></div><div class="parcel-ribbon"></div><div class="parcel-cut"></div><span class="parcel-seal">READY ✓</span></div><strong>The candy parcel</strong><span class="scene-caption" id="parcel-caption">Ribbon waiting to be cut</span></div>
+              <div class="scene-station house-station"><div class="house-prop"><svg class="house-illustration" viewBox="0 0 220 200" fill="none" aria-hidden="true"><circle cx="166" cy="33" r="23" fill="#d8c5ec"/><path d="m36 99 56-56 54 56v75H36V99Z" fill="#292134" stroke="#71617f" stroke-width="2"/><path d="m20 101 72-72 72 72-14 4-58-56-58 56-14-4Z" fill="#51415d"/><path d="M117 51V26h15v39" fill="#51415d"/><path d="m64 174 3-42q24-19 44 0l3 42" fill="#130f1b" stroke="#71617f"/><g class="house-windows" fill="#ffc16e"><path d="M50 99h19v23H50zM112 99h19v23h-19zM80 66h22v24H80z"/></g><g stroke="#392635" stroke-width="3"><path d="M59 99v23m-9-12h19M122 99v23m-10-12h19M91 66v24m-11-12h22"/></g><rect class="cable-boundary" x="122" y="137" width="92" height="55" rx="13" fill="none" stroke="#ff989f" stroke-width="2" stroke-dasharray="5 4"/><path class="house-cable" d="M168 174h22c20 0 20-30 0-30h-7c-13 0-13 30-26 30h-14" stroke="#bada90" stroke-width="5" stroke-linecap="round"/><path d="m137 165 10 2v14l-10 2v-18Zm-7 3h7m-7 11h7" stroke="#bada90" stroke-width="3"/><path d="m16 35 13-7 7 4 8-13 2 19 15 3-22 8-10-7-13-7Z" fill="#9b81b0"/></svg><div class="cable-ward" aria-hidden="true"></div><span class="scene-cable-name"><span aria-hidden="true">⊘</span><span><strong>Cable off limits</strong><small>DO NOT CUT</small></span></span></div><strong>House power cable</strong><span class="scene-caption" id="house-caption">Verification pending</span></div>
+              <div id="mission-activity" class="mission-activity" hidden><span class="mission-activity-indicator" aria-hidden="true"></span><span class="mission-activity-copy" role="status" aria-live="polite" aria-atomic="true"><strong id="mission-activity-title"></strong><span id="mission-activity-detail"></span></span><span id="mission-activity-elapsed" class="mission-activity-elapsed" role="timer" aria-live="off" title="Time in this runtime step. Pausing playback does not pause the runtime." hidden></span></div>
+              <div class="scene-status" id="scene-status" hidden></div>
+            </div>
+            <div class="mission-playback-controls" role="group" aria-labelledby="mission-playback-title">
+              <div class="mission-playback-heading"><p class="mission-control-label visually-hidden" id="mission-playback-title">Animation playback</p></div>
+              <div class="motion-playback-buttons">
+                <button type="button" id="motion-pause" class="playback-button" aria-controls="mission-scene mission-code-panel" aria-pressed="false" disabled>Pause animation</button>
+                <button type="button" id="motion-step" class="playback-button" aria-controls="mission-scene mission-code-panel" disabled>Next event</button>
+                <button type="button" id="motion-replay" class="text-button motion-replay playback-button" hidden>Replay events ↻</button>
+              </div>
+              <p class="mission-playback-note">Pausing holds the animation and code. The runtime continues.</p>
+              <p id="motion-playback-status" class="motion-playback-status visually-hidden" aria-live="polite">Waiting for observed events.</p>
+            </div>
+            <aside class="mission-code-panel" id="mission-code-panel" aria-labelledby="mission-code-title" hidden>
+              <div class="mission-code-header"><p class="eyebrow">Source synced to observed events</p><h4 id="mission-code-title">Follow the mission in code</h4></div>
+              <p id="mission-code-status" aria-live="polite">Loading the actual mission source…</p>
+              <div class="code-playback-controls" role="group" aria-label="Playback while reading code"><button type="button" id="code-motion-pause" class="code-playback-button" aria-controls="mission-scene mission-code-panel" aria-pressed="false" disabled>Pause animation</button><button type="button" id="code-motion-step" class="code-playback-button" aria-controls="mission-scene mission-code-panel" disabled>Next event</button></div>
+              <div class="policy-phase-tabs code-stage-tabs" role="group" aria-label="Inspect observed mission code"><button type="button" data-policy-phase="before" aria-pressed="false" disabled>Before crash</button><button type="button" data-code-phase="tool" aria-pressed="false" disabled>Tool waiting</button><button type="button" data-code-phase="crash" aria-pressed="false" disabled>SIGKILL</button><button type="button" data-code-phase="recovery" aria-pressed="false" disabled>Resume call</button><button type="button" data-code-phase="finish" aria-pressed="false" disabled>Agent continues</button><button type="button" data-policy-phase="after" aria-pressed="false" disabled>After recovery</button></div>
+              <label class="policy-follow"><input type="checkbox" id="mission-code-follow" checked disabled />Follow animation</label>
+              <p id="mission-code-proof"></p>
+              <p id="mission-code-identity" hidden></p>
+              <div id="mission-code-guard"></div>
+              <details class="policy-binding"><summary>Where Golem attaches this policy</summary><div id="mission-code-binding"></div></details>
+              <p id="mission-code-explanation"></p>
+            </aside>
+            </div>
+            </div>
+            <div class="motion-panel"><p class="motion-readout" id="motion-readout" aria-live="polite">Waiting for confirmed runtime events.</p><ol id="motion-event-receipts" class="motion-event-receipts" aria-label="Observed events driving the animation"></ol><div class="motion-actions"><span>Visual transitions can trail the live status. Each cue names its observed event.</span></div></div>
+            <p class="mission-control-label live-progress-label">Live runtime progress</p>
+            <div class="mission-story-progress" id="mission-progress" aria-label="Live runtime progress"><span id="story-step-work" data-state="pending">1 · Cut the ribbon</span><span id="story-step-crash" data-state="pending">2 · Server dies mid-tool</span><span id="story-step-return" data-state="pending">3 · Recover and check the rules</span></div>
+            <fieldset class="prediction" id="mission-prediction"><legend>After the crash, what do you think will happen?</legend><label><input type="radio" name="prediction" value="lost"><span>The job is lost<small>Golem forgets what it was doing.</small></span></label><label><input type="radio" name="prediction" value="duplicate"><span>Two cuts in the final parcel<small>Starting over leaves duplicate work.</small></span></label><label><input type="radio" name="prediction" value="both"><span>The job and the rules survive<small>One cut, a sealed box, a protected cable.</small></span></label></fieldset>
+            <p id="prediction-feedback" class="prediction-feedback" aria-live="polite">Make a prediction, or jump straight into the experiment.</p>
+            <div class="mission-receipts" id="mission-receipts" aria-label="Observed mission results"><div class="mission-receipt" id="receipt-parcel" data-state="pending"><small>The work</small><strong id="receipt-parcel-title">Candy not ready yet</strong><p id="receipt-parcel-detail">The parcel must be cut and sealed.</p></div><div class="mission-receipt" id="receipt-tool" data-state="pending"><small>Rule one · knife target</small><strong id="receipt-tool-title">Knife check after recovery</strong><p id="receipt-tool-detail">A fresh cable-target request must be denied.</p></div><div class="mission-receipt" id="receipt-filesystem" data-state="pending"><small>Rule two · direct write</small><strong id="receipt-filesystem-title">Direct-write check after recovery</strong><p id="receipt-filesystem-detail">A fresh direct write must also be denied.</p></div></div>
+            <p class="mission-footnote">A visual story of the actual runtime run. The props represent the parcel and protected-cable files. <a class="mission-link" href="http://127.0.0.1:4320/">Read the code walkthrough ↗</a></p>
+          </article>
+          <details class="technical-details" id="technical-details"><summary>How do we know? <span>Open the runtime evidence</span></summary>
+
+          <div class="lab-grid">
+            <article class="execution-panel panel" aria-labelledby="execution-title">
+              <div class="panel-heading">
+                <h3 id="execution-title"><span class="panel-number">01</span> Agent execution</h3>
+                
+              </div>
+
+              <div class="execution-intro">
+                <p id="run-description">Connecting to the local runtime…</p>
+                <div class="run-facts">
+                  <div><span id="worker-pid-label">Process PID</span><strong id="worker-pid">—</strong></div>
+                  <div><span>Attempt</span><strong id="attempt-number">—</strong></div>
+                  <div><span>Run</span><strong id="run-id" title="No run yet">—</strong></div>
+                </div>
+                <div id="golem-evidence" class="golem-evidence" hidden><span id="golem-process-proof"></span><a id="golem-evidence-link" href="#" target="_blank" rel="noreferrer" hidden>View Golem evidence ↗</a></div>
+              </div>
+
+              <ol class="step-trail" aria-label="Experiment progress">
+                <li id="step-cut" data-state="pending"><span class="step-marker" aria-hidden="true">1</span><div><strong id="step-cut-title">Cut the parcel</strong><span id="step-cut-description">Host commits the permitted effect.</span></div><span class="step-tag">Allowed</span></li>
+                <li id="step-crash" data-state="pending"><span class="step-marker" aria-hidden="true">2</span><div><strong id="step-crash-title">The process is killed</strong><span id="step-crash-description">Before the agent receives its result.</span></div><span class="step-tag">Fault injected</span></li>
+                <li id="step-replay" data-state="pending"><span class="step-marker" aria-hidden="true">3</span><div><strong id="step-replay-title">Replay, then finish</strong><span id="step-replay-description">Reuse the saved result. Enforce every rule.</span></div><span class="step-tag">Resume</span></li>
+              </ol>
+
+
+            </article>
+
+            <article class="policy-panel panel" aria-labelledby="policy-title">
+              <div class="panel-heading"><h3 id="policy-title"><span class="panel-number">02</span> The protective ward <span class="technical-label">/ Host policy</span></h3><span class="policy-lock" aria-hidden="true">⊞</span></div>
+              <div class="policy-content">
+                <p class="policy-lead">Back from the dead.<br />Still needs permission.</p>
+                <p id="policy-description" class="muted">A tool name is not a permission. Each target is checked outside the agent.</p>
+                <div class="policy-calls" aria-label="Tool access rules">
+                  <div><code>knife(<span>parcel</span>)</code><span class="decision allow">Allowed <span aria-hidden="true">↗</span></span></div>
+                  <div><code>knife(<span>safety-cable</span>)</code><span class="decision deny">Denied <span aria-hidden="true">⊘</span></span></div>
+                </div>
+                <div class="code-block"><span id="policy-code-label" class="code-label">Policy, in plain code</span><pre><code id="policy-code"><span class="code-purple">if</span> (tool === <span class="code-green">"knife"</span>) {
+  <span class="code-purple">return</span> target === <span class="code-green">"parcel"</span>
+    ? <span class="code-green">"allow"</span>
+    : <span class="code-orange">"deny"</span>;
+}</code></pre></div>
+                <p class="policy-footnote"><span class="signal-dot"></span><span id="policy-footnote">Model-supplied “admin” claims have no authority.</span></p>
+                <p class="policy-footnote policy-counter"><span id="denied-label">Blocked tool calls</span><strong id="denied-count">0</strong></p>
+              </div>
+            </article>
+          </div>
+
+          <div class="proof-strip" aria-label="Persistent results">
+            <div class="proof-title"><span class="eyebrow">Signs of life</span><p>Real evidence.<br />No dark magic.</p></div>
+            <div class="proof-stat"><span>Parcel cuts</span><strong id="parcel-cuts">0<span>×</span></strong><small id="parcel-cuts-note">One committed cut, even after replay.</small></div>
+            <div class="proof-stat"><span>Protected cable</span><strong id="cable-state" class="positive">Intact<span>↗</span></strong><small>The denied call cannot change it.</small></div>
+            <div class="proof-stat"><span>Parcel sealed</span><strong id="sealed-state">Waiting<span>—</span></strong><small>Remaining work finishes after recovery.</small></div>
+            <div class="proof-stat"><span id="replayed-label">Replayed calls</span><strong id="replayed-count">0<span>↻</span></strong><small id="replayed-note">Saved results, without repeating effects.</small></div>
+          </div>
+
+        <section class="detail-grid" aria-label="Runtime evidence and architecture">
+          <article class="journal-panel panel" aria-labelledby="journal-title">
+            <div class="panel-heading"><h3 id="journal-title"><span class="panel-number">03</span> The resurrection record <span class="technical-label">/ Journal</span></h3><span id="event-count" class="mono-label">0 EVENTS</span></div>
+            <div class="journal-caption"><span class="live-indicator"></span> Experiment log <span>Newest first</span></div>
+            <div id="journal-empty" class="journal-empty"><span aria-hidden="true">≡</span><strong>The story starts with a tool call.</strong><p>Run the experiment to see policy decisions, the crash, and recovery recorded here.</p></div>
+            <ol id="event-log" class="event-log" aria-label="Recorded runtime events" hidden></ol>
+          </article>
+
+          <article class="boundary-panel panel" aria-labelledby="boundary-title">
+            <div class="panel-heading"><h3 id="boundary-title"><span class="panel-number">04</span> The trust boundary</h3><span class="mono-label">HOST ENFORCED</span></div>
+            <div class="boundary-content">
+              <div class="boundary-agent"><span class="boundary-icon" aria-hidden="true">⌘</span><div><strong id="boundary-agent-title">WebAssembly agent</strong><span>Requests a capability</span></div><span class="boundary-label">Sandbox</span></div>
+              <div class="boundary-connector" aria-hidden="true"><span></span><i>↓</i><span>Tool request</span></div>
+              <div class="host-boundary"><span id="boundary-host-label" class="host-boundary-label">Trusted host</span><div class="host-policy"><span class="boundary-icon" aria-hidden="true">⊞</span><div><strong id="boundary-policy-title">Policy + durable journal</strong><span id="boundary-policy-description">Check → commit effect &amp; result</span></div></div><div class="host-tools"><span>knife(parcel)</span><span>seal(parcel)</span></div></div>
+              <p id="boundary-explanation" class="boundary-explanation">Restart the agent; keep the host’s history. A completed call returns its recorded result. A forbidden call stays forbidden.</p>
+              <div class="import-line"><span id="imports-label">Agent imports</span><code id="wasm-imports">—</code></div>
+            </div>
+          </article>
+        </section>
+
+          </details>
+        </section>
+
+        <section class="takeaway" aria-labelledby="takeaway-title"><span class="takeaway-mark" aria-hidden="true">✦</span><div><h2 id="takeaway-title">Some things should come back. Your permissions shouldn’t change.</h2><p>The journal brings the work back. The host keeps the boundaries in place.</p></div></section>
+      </main>
+
+      <footer>
+        <div class="footer-top"><span class="brand footer-brand"><img class="brand-mark brand-logo" src="/assets/golem-logo.png" alt="" width="40" height="40" aria-hidden="true" />Golem Afterlife Lab</span><div class="source-links"><a id="durability-source" href="https://learn.golem.cloud/v1.6/concepts/durable-execution" target="_blank" rel="noreferrer">Durable execution <span aria-hidden="true">↗</span></a><a id="permissions-source" href="https://learn.golem.cloud/v1.6/concepts/permissions" target="_blank" rel="noreferrer">Permissions <span aria-hidden="true">↗</span></a></div></div>
+        <p id="runtime-caveat">The runtime and its recovery guarantees will appear when the experiment connects.</p>
+      </footer>
+      <div id="live-status" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+    </div>
+  </body>
+</html>

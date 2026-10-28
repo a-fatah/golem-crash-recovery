@@ -1,0 +1,26 @@
+/* The same mission and evidence, presented inside the article's reading column. */
+body[data-presentation="embedded"] { background: var(--panel); }
+body[data-presentation="embedded"] .page-shell { display: flow-root; padding: 0; max-width: none; }
+body[data-presentation="embedded"] .masthead,
+body[data-presentation="embedded"] main > .hero,
+body[data-presentation="embedded"] .takeaway,
+body[data-presentation="embedded"] footer,
+body[data-presentation="embedded"] #experiment > .section-heading,
+body[data-presentation="embedded"] .mission-header .eyebrow,
+body[data-presentation="embedded"] .mission-code-header .eyebrow,
+body[data-presentation="embedded"] .mission-footnote { display: none; }
+body[data-presentation="embedded"] .mission-panel { border: 0; border-radius: 0; padding: 16px; box-shadow: none; }
+body[data-presentation="embedded"] .mission-header { flex-wrap: wrap; gap: 8px 14px; }
+body[data-presentation="embedded"] .mission-header h3 { margin: 0; font-size: 22px; }
+body[data-presentation="embedded"] .mission-header .status-badge { padding: 4px 7px; }
+body[data-presentation="embedded"] .mission-help { margin-block: 0 6px; }
+body[data-presentation="embedded"] .mission-help .mission-narrative { font-size: 12px; line-height: 1.7; }
+body[data-presentation="embedded"] .technical-details { margin: 0 16px 16px; }
+body[data-presentation="embedded"] .technical-details > summary { min-height: 44px; padding: 8px 12px; }
+body[data-presentation="embedded"] .motion-actions { display: none; }
+body[data-presentation="embedded"] .motion-event-receipts { gap: 5px; }
+@media (max-width: 440px) {
+  body[data-presentation="embedded"] .mission-panel { padding: 14px 10px; }
+  body[data-presentation="embedded"] .mission-header h3 { font-size: 20px; }
+  body[data-presentation="embedded"] .technical-details { margin: 0 10px 14px; }
+}

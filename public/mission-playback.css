@@ -1,0 +1,103 @@
+/* Runtime actions stay beside the scene; playback controls follow the animation. */
+.mission-stage { min-width: 0; }
+.mission-help { margin: 4px 0 12px; color: var(--muted); }
+.mission-help > summary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  gap: 7px;
+  color: #cbb7d5;
+  cursor: pointer;
+  font: 11px/1.6 var(--sans);
+}
+.mission-help > summary::after { content: "+"; font-size: 16px; }
+.mission-help[open] > summary::after { content: "−"; }
+.mission-help > .mission-narrative { margin: 0 0 8px; }
+.mission-help > .mission-action-note { margin: 0 0 12px; }
+.mission-run-controls { margin: 0; padding: 0; }
+.mission-run-controls .action-bar { margin: 0; padding: 0; gap: 8px; }
+.mission-run-controls .button { min-height: 44px; width: auto; }
+.mission-run-controls .text-button { min-height: 44px; padding: 8px; }
+.mission-run-controls .error-box { margin: 10px 0; }
+.mission-stage .mission-rule {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 12px;
+}
+.mission-stage .mission-rule > div {
+  gap: 7px;
+  padding: 6px 10px;
+  border-radius: 5px;
+  background: transparent;
+}
+.mission-stage .mission-rule .rule-symbol { font-size: 18px; }
+.mission-stage .mission-rule b { font-size: 11px; letter-spacing: 0; text-transform: none; }
+.mission-stage .mission-rule small { font-size: 10px; }
+.mission-stage .mission-workspace { gap: 10px; }
+#mission-scene { scroll-margin-top: 120px; }
+.mission-playback-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  min-width: 0;
+  margin: 0;
+  padding: 0 0 5px;
+}
+.mission-playback-heading { display: contents; }
+.mission-control-label {
+  margin: 0;
+  color: var(--orange);
+  font: 10px/1.5 var(--mono);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.mission-playback-note {
+  flex-basis: 100%;
+  margin: 0;
+  color: var(--muted);
+  font: 10px/1.6 var(--sans);
+}
+.motion-playback-buttons { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.mission-playback-controls .playback-button,
+.mission-code-panel .code-playback-button {
+  flex: 0 0 auto;
+  min-height: 44px;
+  margin: 0;
+  padding: 8px 11px;
+  border: 1px solid #745b80;
+  border-radius: 5px;
+  background: #2a1e35;
+  color: #eee0f4;
+  cursor: pointer;
+  font: 11px/1.6 var(--sans);
+  white-space: nowrap;
+}
+.mission-playback-controls .playback-button:hover:not(:disabled):not([aria-disabled="true"]),
+.mission-code-panel .code-playback-button:hover:not(:disabled):not([aria-disabled="true"]) { border-color: #c397d9; background: #3b2948; }
+.mission-playback-controls .playback-button[aria-pressed="true"],
+.mission-code-panel .code-playback-button[aria-pressed="true"] { border-color: #e1ac72; background: #3d2b22; color: #ffd4a2; }
+.mission-playback-controls .playback-button:is(:disabled, [aria-disabled="true"]),
+.mission-code-panel .code-playback-button:is(:disabled, [aria-disabled="true"]) { border-color: #4a3b54; background: #211929; color: #a696b2; cursor: default; }
+.mission-playback-controls .playback-button:focus-visible,
+.mission-code-panel .code-playback-button:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+.mission-playback-controls .motion-replay { border-color: #815f41; color: var(--orange); }
+.live-progress-label { margin-top: 20px; color: var(--muted); }
+.code-playback-controls { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 12px; }
+@media (min-width: 1100px) {
+  .mission-workspace:has(> .mission-code-panel:not([hidden])) { align-items: start; grid-template-rows: min-content 1fr; }
+  .mission-workspace:has(> .mission-code-panel:not([hidden])) > .mission-scene { grid-column: 1; grid-row: 1; min-height: 275px; }
+  .mission-workspace:has(> .mission-code-panel:not([hidden])) > .mission-playback-controls { grid-column: 1; grid-row: 2; }
+  .mission-workspace:has(> .mission-code-panel:not([hidden])) > .mission-code-panel { grid-column: 2; grid-row: 1 / span 2; }
+}
+@media (max-width: 600px) {
+  .mission-help { margin-bottom: 6px; }
+  .mission-stage .mission-rule { gap: 7px; margin-block: 9px; }
+  .mission-stage .mission-rule > div { flex: 1 1 120px; padding: 6px 8px; }
+  .mission-playback-controls .playback-button,
+  .mission-code-panel .code-playback-button { padding-inline: 10px; }
+  .mission-playback-controls .motion-replay { padding-inline: 8px; }
+  .mission-code-panel .code-stage-tabs { display: flex; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 3px; }
+  .mission-code-panel .code-stage-tabs button { flex: 0 0 auto; min-height: 44px; padding-inline: 10px; }
+}

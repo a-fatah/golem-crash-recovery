@@ -1,0 +1,16 @@
+{
+  "name": "golem-crash-recovery",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A real Golem 1.6.1 crash-recovery and policy-enforcement experiment.",
+  "engines": {
+    "node": ">=24.11.0"
+  },
+  "scripts": {
+    "setup": "npm --prefix golem-parcel-lab ci && npm --prefix golem-parcel-lab run setup",
+    "start": "npm --prefix golem-parcel-lab start",
+    "verify": "npm --prefix golem-parcel-lab run verify",
+    "test": "npm --prefix golem-parcel-lab test && node --test test/*.test.mjs"
+  }
+}

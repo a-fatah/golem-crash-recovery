@@ -1,0 +1,240 @@
+/* Event-driven visual stages. The controller owns observed results and stage order.
+   Stage durations: cutting 1600ms, falling 900ms, rising 1400ms, sealing 1100ms. */
+.mission-scene[data-motion] {
+  --courier-step: min(14vw, 180px);
+  --courier-fall-x: -38px;
+  --courier-fall-y: 0px;
+  --cut-duration: 1600ms;
+  --fall-duration: 900ms;
+  --rise-duration: 1400ms;
+  --seal-duration: 1100ms;
+}
+
+.courier-rig {
+  position: relative;
+  isolation: isolate;
+  z-index: 3;
+  width: 235px;
+  height: 205px;
+  max-width: 100%;
+  flex-shrink: 0;
+  transform-origin: 50% 50%;
+}
+.mission-scene[data-motion] .courier-rig .hero-art {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  margin: 0;
+  opacity: 1;
+  filter: none;
+  mix-blend-mode: normal;
+  transition: none;
+}
+.mission-scene[data-motion] .courier-rig .official-golem-portrait {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  mix-blend-mode: normal;
+}
+.courier-knife {
+  position: absolute;
+  z-index: 4;
+  width: 32%;
+  height: auto;
+  left: 88%;
+  top: 43%;
+  overflow: visible;
+  pointer-events: none;
+  transform: rotate(-28deg);
+  transform-origin: 18% 82%;
+  filter: drop-shadow(0 2px 2px #0005);
+}
+.courier-knife .blade { fill: #e1e8e3; stroke: #859891; stroke-width: 1; }
+.courier-knife .knifehandle, .courier-knife .knife-handle { fill: #654238; stroke: #b7886c; stroke-width: 1; }
+.resurrection-glow {
+  position: absolute;
+  z-index: -1;
+  left: -15%;
+  top: 8%;
+  width: 130%;
+  height: 90%;
+  border: 1px solid #ffac6966;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, #ffad692b, #bb97e413 45%, transparent 70%);
+  box-shadow: 0 0 25px #ffa45d24, inset 0 0 24px #ffa45d13;
+  opacity: 0;
+  pointer-events: none;
+}
+.resurrection-glow::after {
+  content: "";
+  position: absolute;
+  inset: 13%;
+  border: 1px dashed #d2b8ef66;
+  border-radius: 50%;
+  transform: rotate(-22deg);
+}
+.stone-dust {
+  position: absolute;
+  z-index: 5;
+  bottom: 1%;
+  left: 9%;
+  width: 82%;
+  height: 35px;
+  opacity: 0;
+  pointer-events: none;
+}
+.stone-dust span {
+  --dust-x: -35px;
+  --dust-y: -16px;
+  position: absolute;
+  left: 42%;
+  bottom: 2px;
+  width: 10px;
+  height: 7px;
+  border-radius: 2px;
+  background: #aba1ae;
+  box-shadow: 0 0 8px #b0a2bf26;
+}
+.stone-dust span:nth-child(2) { --dust-x: 12px; --dust-y: -24px; width: 7px; height: 8px; }
+.stone-dust span:nth-child(3) { --dust-x: 49px; --dust-y: -10px; width: 8px; height: 6px; }
+
+/* Each stage has a stable pose even when animation is disabled or interrupted. */
+.mission-scene[data-motion="ready"] .courier-rig,
+.mission-scene[data-motion="preparing"] .courier-rig,
+.mission-scene[data-motion="done"] .courier-rig { transform: none; opacity: 1; filter: none; }
+.mission-scene[data-motion="cutting"] .courier-rig {
+  transform: translateX(var(--courier-step)) rotate(11deg);
+  animation: courier-cut var(--cut-duration) cubic-bezier(.3, .05, .2, 1) both;
+}
+.mission-scene[data-motion="cutting"] .courier-knife {
+  transform: rotate(24deg);
+  animation: knife-sweep var(--cut-duration) ease-in-out both;
+}
+.mission-scene[data-motion="cutting"] .parcel-cut { animation: ribbon-slice var(--cut-duration) linear both; }
+.mission-scene[data-motion="cutting"] .parcel-ribbon { animation: ribbon-part var(--cut-duration) linear both; }
+.mission-scene[data-motion="cutting"] .parcel-lid { animation: parcel-open var(--cut-duration) ease-out both; }
+.mission-scene[data-motion="falling"] .courier-rig,
+.mission-scene[data-motion="down"] .courier-rig {
+  transform: translate(calc(var(--courier-step) + var(--courier-fall-x)), var(--courier-fall-y)) rotate(70deg);
+  opacity: .65;
+  filter: grayscale(.9);
+}
+.mission-scene[data-motion="falling"] .courier-rig { animation: courier-fall var(--fall-duration) cubic-bezier(.45, .02, .75, 1) both; }
+.mission-scene[data-motion="falling"] .courier-knife { animation: knife-drop var(--fall-duration) ease-in both; }
+.mission-scene[data-motion="falling"] .courier-knife,
+.mission-scene[data-motion="down"] .courier-knife { transform: translate(13px, 28px) rotate(115deg); opacity: .5; }
+.mission-scene[data-motion="falling"] .stone-dust { animation: dust-appear var(--fall-duration) linear both; }
+.mission-scene[data-motion="falling"] .stone-dust span { animation: stone-scatter var(--fall-duration) ease-out both; }
+.mission-scene[data-motion="rising"] .courier-rig {
+  transform: translateX(var(--courier-step));
+  opacity: 1;
+  filter: none;
+  animation: courier-rise var(--rise-duration) cubic-bezier(.2, .75, .2, 1) both;
+}
+.mission-scene[data-motion="rising"] .resurrection-glow { animation: resurrection-aura var(--rise-duration) ease-out both; }
+.mission-scene[data-motion="rising"] .courier-knife { animation: knife-recover var(--rise-duration) ease-out both; }
+.mission-scene[data-motion="finishing"] .courier-rig { transform: translateX(var(--courier-step)) rotate(4deg); }
+.mission-scene[data-motion="finishing"] .courier-knife { opacity: .35; transform: translate(0, 10px) rotate(50deg); }
+.mission-scene[data-motion="sealing"] .courier-rig { transform: none; animation: courier-pack var(--seal-duration) ease-in-out both; }
+.mission-scene[data-motion="sealing"] .courier-knife { opacity: 0; }
+.mission-scene[data-motion="sealing"] .parcel-lid { transform: none; animation: parcel-close var(--seal-duration) ease-in-out both; }
+.mission-scene[data-motion="sealing"] .parcel-seal { animation: parcel-stamp var(--seal-duration) ease-out both; }
+.mission-scene[data-motion="done"] .courier-knife { opacity: 0; }
+.mission-scene[data-motion="failed"] .courier-rig { transform: none; opacity: .65; filter: grayscale(.4); }
+.mission-scene[data-motion="failed"] .courier-knife { opacity: .3; }
+.motion-readout, #motion-readout { margin: 12px 0 0; padding-left: 11px; border-left: 2px solid #8c6a48; color: var(--muted, #afa3bd); font: 10px/1.8 var(--mono, monospace); }
+.motion-event-receipts { display: flex; flex-wrap: wrap; gap: 7px; list-style: none; margin: 10px 0; padding: 0; }
+.motion-event-receipts li { padding: 5px 8px; border: 1px solid var(--line); border-radius: 4px; color: var(--muted); font: 9px/1.6 var(--mono); }
+.motion-event-receipts li[data-status="playing"] { border-color: #b98350; color: var(--orange); }
+.motion-event-receipts li[data-status="played"] { color: var(--ink); }
+.motion-actions { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; align-items: center; margin: 7px 0 17px; color: var(--muted); font-size: 10px; line-height: 1.7; }
+.motion-replay { padding: 6px 0; color: var(--orange); }
+
+@keyframes courier-cut {
+  0%, 12% { transform: translateX(0) rotate(0); }
+  43% { transform: translateX(var(--courier-step)) rotate(5deg); }
+  63% { transform: translateX(var(--courier-step)) rotate(-4deg); }
+  78% { transform: translateX(var(--courier-step)) rotate(17deg); }
+  100% { transform: translateX(var(--courier-step)) rotate(11deg); }
+}
+@keyframes knife-sweep {
+  0%, 43% { transform: rotate(-28deg); }
+  58% { transform: rotate(-66deg) translate(0, -7px); }
+  73% { transform: rotate(55deg) translate(6px, 9px); }
+  100% { transform: rotate(24deg); }
+}
+@keyframes ribbon-slice {
+  0%, 66% { opacity: 0; transform: rotate(-23deg) scaleX(0); }
+  76%, 100% { opacity: 1; transform: rotate(-23deg) scaleX(1); }
+}
+@keyframes ribbon-part {
+  0%, 69% { background: #b5a0cb; }
+  70%, 100% { background: linear-gradient(#b5a0cb 0 35%, transparent 35% 46%, #b5a0cb 46%); }
+}
+@keyframes parcel-open {
+  0%, 75% { transform: none; }
+  88% { transform: translate(-4px, -16px) rotate(-17deg); }
+  100% { transform: translate(-4px, -12px) rotate(-13deg); }
+}
+@keyframes courier-fall {
+  0% { transform: translateX(var(--courier-step)) rotate(11deg); opacity: 1; filter: none; }
+  28% { transform: translateX(var(--courier-step)) translateY(8px) rotate(18deg); opacity: .9; }
+  75% { transform: translate(calc(var(--courier-step) + var(--courier-fall-x)), calc(var(--courier-fall-y) + 5px)) rotate(74deg); opacity: .5; }
+  100% { transform: translate(calc(var(--courier-step) + var(--courier-fall-x)), var(--courier-fall-y)) rotate(70deg); opacity: .65; filter: grayscale(.9); }
+}
+@keyframes knife-drop {
+  0%, 25% { transform: rotate(24deg); opacity: 1; }
+  100% { transform: translate(13px, 28px) rotate(115deg); opacity: .5; }
+}
+@keyframes dust-appear { 0%, 56% { opacity: 0; } 65% { opacity: .8; } 100% { opacity: 0; } }
+@keyframes stone-scatter {
+  0%, 56% { transform: translate(0, 0) rotate(0); }
+  100% { transform: translate(var(--dust-x), var(--dust-y)) rotate(75deg); }
+}
+@keyframes courier-rise {
+  0%, 10% { transform: translate(calc(var(--courier-step) + var(--courier-fall-x)), var(--courier-fall-y)) rotate(70deg); opacity: .65; filter: grayscale(.9); }
+  64% { transform: translateX(var(--courier-step)) translateY(-9px) rotate(-7deg); opacity: 1; filter: grayscale(0); }
+  82% { transform: translateX(var(--courier-step)) rotate(3deg); }
+  100% { transform: translateX(var(--courier-step)); opacity: 1; filter: none; }
+}
+@keyframes resurrection-aura {
+  0% { opacity: 0; transform: scale(.3) rotate(-65deg); }
+  28% { opacity: .9; }
+  72% { opacity: .6; transform: scale(1.08) rotate(20deg); }
+  100% { opacity: 0; transform: scale(1.25) rotate(45deg); }
+}
+@keyframes knife-recover {
+  0%, 15% { transform: translate(13px, 28px) rotate(115deg); opacity: .5; }
+  80%, 100% { transform: rotate(-28deg); opacity: 1; }
+}
+@keyframes courier-pack {
+  0% { transform: translateX(var(--courier-step)) rotate(4deg); }
+  32% { transform: translateX(var(--courier-step)) translateY(5px) rotate(14deg); }
+  58% { transform: translateX(var(--courier-step)) rotate(4deg); }
+  100% { transform: none; }
+}
+@keyframes parcel-close {
+  0%, 16% { transform: translate(-4px, -12px) rotate(-13deg); }
+  52% { transform: translateY(2px) rotate(0); }
+  67%, 100% { transform: none; }
+}
+@keyframes parcel-stamp {
+  0%, 57% { opacity: 0; transform: translateY(-15px) scale(1.4); }
+  76% { opacity: 1; transform: scale(.9); }
+  90%, 100% { opacity: 1; transform: scale(1); }
+}
+
+@media (max-width: 800px) {
+  .courier-rig { width: 170px; height: 160px; }
+  .mission-scene[data-motion] { --courier-step: min(12vw, 90px); --courier-fall-x: -25px; }
+}
+@media (max-width: 440px) {
+  .courier-rig { width: 130px; height: 125px; }
+  .mission-scene[data-motion] { --courier-step: min(12vw, 55px); --courier-fall-x: -12px; }
+  .courier-knife { width: 35%; right: 1%; }
+  .motion-readout { font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mission-scene[data-motion] *, .mission-scene[data-motion] *::before, .mission-scene[data-motion] *::after { animation: none !important; transition: none !important; }
+  .mission-scene[data-motion] .resurrection-glow, .mission-scene[data-motion] .stone-dust { display: none; }
+}
